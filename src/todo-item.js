@@ -1,7 +1,7 @@
-export default function createItem(title, desc=null, dueDate=null, priority=null, labels=null, notes=null) {
+export default function createItem(name, desc=null, dueDate=null, priority=null, labels=null, notes=null) {
     let complete = false;
     return {
-        title,
+        name,
         desc,
         dueDate,
         priority,

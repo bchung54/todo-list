@@ -3,10 +3,12 @@ import createProject from './projects.js';
 import createItem from './todo-item.js';
 
 
-const todo = new createItem("Create webpage");
-const project = new createProject("Web Programming");
-const project2 = new createProject("Get some");
+const todo = createItem("Create webpage");
+const project = createProject("Web Programming");
+const project2 = createProject("Play Basketball");
 project.addTodo(todo);
 Board.addProject(project);
 Board.addProject(project2);
-Board.displayAll();
+const sidebar = document.getElementById('sidebar');
+Board.displayAllTitles(sidebar);
+Board.displayProject(0);

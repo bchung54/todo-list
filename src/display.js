@@ -27,32 +27,57 @@ const Display = (() => {
         return container;
     };
 
-    // Display selected project in main
-    function displayProject(index) {
+    // Display selected project
+    function displayProject(project) {
+        document.querySelector('.main').append(createProjectDisplay(project));
+    };
+    // Display selected project: create the display for the project
+    function createProjectDisplay(index) {
         const container = createContainer(['project-container']);
         const project = projectsArray[index];
         const titleElement = createContainer(['project-title']);
+        
         titleElement.textContent = project.title;
-        container.append(titleElement);
-        container.append(document.createElement('hr'));
+        
+        const listContainer = document.createElement('ul');
         for (let i = 0; i < project.itemCount; i++) {
             const element = createListItemElement(project.getTodo(i));
-            container.append(element);
+            listContainer.append(element);
         }
 
-        document.querySelector('.main').append(container);
+        container.append(titleElement);
+        container.append(document.createElement('hr'));
+        container.append(listContainer);
+        return container;
     };
+    // Display selected project: create the line item for the list of todos
     function createListItemElement(item) {
-        const container = createContainer(['project-list-item']);
-        const name = createContainer(['list-item-name']);
-        name.textContent = `${item.name}`;
-        const date = createContainer(['list-item-dueDate']);
-        date.textContent = `Due: ${item.getDueDate()}`;
+        const container = document.createElement('li');
+        container.classList.add('project-list-item');
         container.classList.add(`priority-${item.priority}`);
+
+        const checkbox = document.createElement('input');
+        checkbox.setAttribute('type', 'checkbox');
+        
+        const lineItemInfo = createLineItemPart(item);
+        
+        container.append(checkbox);
+        container.append(lineItemInfo);
+        return container;
+    };
+    // Display selected project: create the parts of the line itme for the list
+    function createLineItemPart(item) {
+        const container = createContainer(['quick-info-container']);
+        const name = createContainer(['sub-list-item']);
+        const date = createContainer(['sub-list-item']);
+        
+        name.textContent = `${item.name}`;
+        date.textContent = `Due: ${item.getDueDate()}`;
+
         container.append(name);
         container.append(date);
         return container;
-    };
+    }
 
     // Display todo-item details
     function displayItemDetails(item, DOMelement) {

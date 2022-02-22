@@ -1,10 +1,18 @@
 body {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 100vh;
     display: flex;
     align-items: stretch;
     overflow-y:hidden;
 }
 
+hr {
+    border: #315a83 4px solid;
+}
+
+ul {
+    padding-left:0;
+}
 .sidebar {
     background-color: #7b1800;
     width: 450px;
@@ -24,9 +32,11 @@ body {
 .sidebar-item:hover {
     color: #efe74a;
     background-color: #3184C6;
+    cursor: pointer;
 }
 
 .sidebar-title {
+    text-align: center;
     background-color: #BC1828;
     color: #ddd2d2;
     padding: 10px;
@@ -49,14 +59,39 @@ body {
 
 .project-list-item {
     display: flex;
-    justify-content: space-between;
-    font-size: 28px;
+    align-items: center;
 }
 
 .project-list-item:hover {
-    border: #ffc552 2px solid;
+    border: #315a83 4px solid;
+    cursor: pointer;
+}
+
+.quick-info-container {
+    display: flex;
+    flex: 1 1 0;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 28px;
 }
 
 .labels-container {
     display: flex;
+}
+
+.priority-0 {
+    background-color: white;
+}
+
+.priority-1 {
+    background-color: #ffc552;
+}
+
+.priority-2 {
+    background-color: #e67b7b;
+}
+
+.priority-3 {
+    background-color: #7b1800;
+    color: white;
 }

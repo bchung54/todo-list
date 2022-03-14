@@ -11,9 +11,17 @@ hr {
 }
 
 ul {
-    padding-left:0;
+    padding-left: 0;
+    font-size: 28px;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
 }
 .sidebar {
+    display: flex;
+    flex-direction: column;
     background-color: #7b1800;
     width: 450px;
     overflow-x: hidden;
@@ -25,7 +33,7 @@ ul {
     color: #aaa5a5;
     display: block;
     transition: 0.3s;
-    padding: 10px 50px;
+    padding: 10px 38px;
     border-bottom: #315a83 4px solid;
 }
 
@@ -69,10 +77,20 @@ ul {
 
 .quick-info-container {
     display: flex;
-    flex: 1 1 0;
-    justify-content: space-between;
+    width: 100%;
+    align-items: center;
     padding: 10px;
+}
+
+.quickinfo-subcontainer {
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.new-todo-input {
     font-size: 28px;
+    width: 100%;
 }
 
 .labels-container {
@@ -94,4 +112,29 @@ ul {
 .priority-3 {
     background-color: #7b1800;
     color: white;
+}
+
+button {
+    font-size: 24px;
+    border-radius: 20px;
+    background-color: #3184C6;
+}
+
+#add-todo-button {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.new-project-input {
+    background-color: #7b1800;
+    border-width: 0px;
+    font-size: 28px;
+    color: #aaa5a5;
+    width: 100%;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
 }

@@ -1,6 +1,8 @@
 import Display from './display.js';
+import createBoard from './board.js';
 import createProject from './projects.js';
 import createItem from './todo-item.js';
+import createAddBtn from './createAddBtn.js';
 import './styles.css';
 
 
@@ -14,10 +16,10 @@ const project2 = createProject("Play Basketball");
 project.addTodo(todo);
 project.addTodo(todo2);
 project.addTodo(todo3);
-Display.addProject(project);
-Display.addProject(project2);
-const sidebarContainer = document.querySelector('.sidebar-container');
+const board = createBoard();
+board.addProject(project);
+board.addProject(project2);
 const main = document.querySelector('.main');
-Display.displaySidebarItems(sidebarContainer);
-Display.displayProject(0);
-Display.displayItemDetails(todo, main);
+Display.displaySidebarList(board.getProjectsArray());
+Display.displayProject(project);
+Display.displayItemDetails(main, todo);

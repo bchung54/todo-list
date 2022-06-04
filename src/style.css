@@ -114,6 +114,13 @@ main > * {
     display: flex;
     cursor: pointer;
 }
+.task-action:hover {
+    text-shadow: 2px 2px white;
+}
+
+input[type='checkbox']:checked ~ *:not(.task-action) {
+    text-decoration: line-through;
+}
 
 .show-detail {
     background-color: red;
@@ -136,6 +143,40 @@ main > * {
 
 .task-form {
     display: none;
+}
+
+/* Edit Task Modal */
+
+.bg-modal {
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    height: 300px;
+    width: 800px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 32px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 50px;
+    transform: rotate(45deg);
+    cursor: pointer;
 }
 
 /* body {

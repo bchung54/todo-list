@@ -1,6 +1,6 @@
+import { bg } from "date-fns/locale";
 import Project from "./project";
 import createTask from "./task";
-import createInputBox from "./createInputBox";
 
 const domManager = (function() {
 
@@ -9,7 +9,18 @@ const domManager = (function() {
     const projectList = document.querySelector('.project-list');
     const addProject = document.querySelector('.add-project');
     const projectForm = document.querySelector('.project-form');
-    const projectDisplay = document.querySelector('.project-container');
+    const newProjectInput = document.getElementById('new-project');
+
+    const addTask = document.querySelector('.add-task');
+    const taskForm = document.querySelector('.task-form');
+    const newTaskInput = document.getElementById('new-task');
+    const projectDisplay = document.querySelector('.display');
+
+    const editForm = document.querySelector('.edit-form');
+
+    const bgModal = document.querySelector('.bg-modal');
+    const modalClose = document.querySelector('.close');
+    const modalContent = document.querySelector('.modal-content');
     
     let onDisplayIndex = 0;
 
@@ -18,36 +29,79 @@ const domManager = (function() {
         displayProjectList();
         displayProject(0);
 
-        const userInput = document.getElementById('new-project');
+        
 
         // Eventlisteners
         //
         // Add project button
         addProject.addEventListener('click', function() {
             projectForm.style.display = 'block';
-            userInput.select();
+            newProjectInput.select();
         });
 
+        // New project submitted
         projectForm.addEventListener('submit', function(e) {
-            projectList.append(createSidebarProject(userInput.value, Project.projectCount));
-            Project.addProject(userInput.value);
-            e.target.style.display ='none';
-            userInput.value = '';
+            const newProjectIndex = Project.projectCount;
+            onDisplayIndex = newProjectIndex;
+
+            projectList.append(createSidebarProject(newProjectInput.value, newProjectIndex));
+            Project.addProject(newProjectInput.value);
+            resetDisplay();
+            
+            this.style.display ='none';
+            this.reset();
             e.preventDefault();
+        });
+
+        addTask.addEventListener('click', function() {
+            taskForm.style.display = 'block';
+            newTaskInput.select();
+        });
+
+        taskForm.addEventListener('submit', function(e) {
+            const title = document.getElementById('new-task').value;
+            const dueDate = document.getElementById('new-task-dueDate').value;
+            const priority = document.querySelector('input[name="priority"]:checked').value;
+            const labels = [document.getElementById('new-task-labels').value];
+            const notes = document.getElementById('new-task-notes').value;
+            
+            const currProject = Project.getProject(onDisplayIndex);
+            currProject.addTask(createTask(title, dueDate, priority, labels, notes));
+            this.style.display = 'none';
+            this.reset();
+            resetDisplay();
+            e.preventDefault();
+        });
+
+        editForm.addEventListener('submit', function(e) {
+            const task = Project.getProject(onDisplayIndex).getTask(bgModal.getAttribute('task-index'));
+            task.title = document.getElementById('edit-task').value;
+            task.setDueDate(document.getElementById('edit-date').value);
+            task.priority = document.querySelector('input[type=radio][name=priority-edit]:checked').value;
+            task.labels = document.getElementById('edit-labels').value.split(',');
+            task.notes = document.getElementById('edit-notes').value;
+
+            bgModal.style.display = 'none';
+            resetDisplay();
+            e.preventDefault();
+        });
+
+        modalClose.addEventListener('click', () => { bgModal.style.display = 'none' })
+        bgModal.addEventListener('click', () => { bgModal.style.display = 'none' });
+        modalContent.addEventListener('click', (e) => {
+            // e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
         });
     };
 
     function resetDisplay() {
-        while (projectList.hasChildNodes()) {projectList.removeChild(projectList.firstChild)};
-        displayProjectList();
+        while (projectList.hasChildNodes()) { projectList.removeChild(projectList.firstChild) };
+        if (Project.projectCount != 0) { displayProjectList() };
 
-        projectDisplay.removeChild(projectDisplay.firstChild);
-        displayProject(onDisplayIndex);
-
-        console.log(document.querySelector('.onDisplay'));
-        // if (!document.querySelector('.onDisplay')) {
-        //     document.querySelector(`[project-index="${onDisplayIndex}"]`).classList.add('onDisplay');
-        // }
+        if (projectDisplay.hasChildNodes()) { projectDisplay.removeChild(projectDisplay.firstChild) };
+        if (document.querySelector('.onDisplay')) { displayProject(onDisplayIndex) };
     }
 
     function createContainer(...args) {
@@ -64,7 +118,6 @@ const domManager = (function() {
 
     // Sidebar Display functions
     function displayProjectList() {
-        console.log(Project.projectList);
         Project.projectList.forEach((element, index) => {projectList.append(createSidebarProject(element.title, index))})
     };
 
@@ -83,9 +136,10 @@ const domManager = (function() {
 
         const deleteProject = createTextContainer('delete', 'delete-project')
         
-        deleteProject.addEventListener('click', function() {
+        deleteProject.addEventListener('click', function(e) {
             const parentElement = this.parentElement;
             const deleteIndex = parentElement.getAttribute('project-index');
+
             if (deleteIndex <= onDisplayIndex) {
                 onDisplayIndex--;
                 if (deleteIndex == onDisplayIndex == -1) {
@@ -94,10 +148,10 @@ const domManager = (function() {
             };
             
             Project.deleteProject(deleteIndex);
-            parentElement.classList.add('onDisplay');
             projectList.removeChild(parentElement);
 
             resetDisplay();
+            e.stopImmediatePropagation();
         });
         
         container.append(deleteProject);
@@ -106,12 +160,11 @@ const domManager = (function() {
 
     // Project Display functions
     function displayProject(index) {
-        projectDisplay.append(createProjectElement(Project.getProject(index)));
-
-        if (projectDisplay.hasChildNodes()) {
-            projectDisplay.removeChild(projectDisplay.firstChild);
+        if (projectDisplay.querySelector('.project-element')) {
+            projectDisplay.removeChild(projectDisplay.querySelector('.project-element'));
         }
-        projectDisplay.append(createProjectElement(Project.projectList[index]));
+        projectDisplay.prepend(createProjectElement(Project.getProject(index)));
+
     };
 
     function createProjectElement(project) {
@@ -121,48 +174,21 @@ const domManager = (function() {
         titleElement.textContent = project.title;
 
         const taskList = document.createElement('div');
+        taskList.classList.add('task-list');
         for (let i = 0; i < project.itemCount; i++) {
-            const element = createTaskElement(project.getTask(i));
+            const element = createTaskElement(project.getTask(i), i);
             taskList.append(element);
         };
-        
-        const addTask = document.createElement('button');
-        addTask.textContent = '+ Add Task';
-
-        const taskForm = document.createElement('form');
-        taskForm.classList.add('task-form');
-        const textInput = document.createElement('input');
-        textInput.type = 'text';
-        textInput.placeholder = 'New Task';
-        textInput.setAttribute('id', 'new-task');
-        taskForm.append(textInput);
-        addTask.addEventListener('click', function(){
-            taskForm.style.display = 'block';
-            textInput.select();
-        });
-
-        const submit = document.createElement('input');
-        submit.style.display = 'none';
-
-        taskForm.addEventListener('submit', function(e) {
-            const userInput = document.getElementsById('new-task');
-            const newTask = createTaskElement(userInput.value);
-
-            taskList.append(newTask);
-            e.preventDefault();
-        })
 
         container.append(titleElement);
         container.append(document.createElement('hr'));
         container.append(taskList);
-        container.append(taskForm);
-        container.append(addTask);
-        // container.append(createAddBtn('todo').button);
         return container;
     };
 
-    function createTaskElement(task) {
+    function createTaskElement(task, index) {
         const container = createContainer('task', `priority-${task.priority}`);
+        container.setAttribute('task-index', index);
 
         const taskHeader = createTaskHeader(task);
         taskHeader.addEventListener('click', toggleDetails);
@@ -187,16 +213,46 @@ const domManager = (function() {
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.addEventListener('click', function(e) {
+            
+            const taskElementIndex = this.parentElement.parentElement.getAttribute('task-index');
+            const task = Project.getProject(onDisplayIndex).getTask(taskElementIndex);
+            
+            task.toggleComplete();
+            e.stopPropagation();
+        });
 
         const title = document.createElement('div');
         title.textContent = task.title;
 
         const date = document.createElement('div');
-        date.textContent = "Due: " + task.dueDate;
+        date.textContent = "Due: " + task.getDueDate();
 
-        const editTask = createTextContainer('Edit', 'task-edit');
+        const editTask = createTextContainer('Edit', 'task-action');
 
-        const deleteTask = createTextContainer('Delete', 'task-delete');
+        editTask.addEventListener('click', function(e) {
+            const taskIndex = this.parentElement.parentElement.getAttribute('task-index');
+            const task = Project.getProject(onDisplayIndex).getTask(taskIndex);
+            document.getElementById('edit-task').value = task.title;
+            document.getElementById('edit-date').value = task.dueDate;
+            document.getElementById(`pedit${task.priority}`).checked = 'checked';
+            document.getElementById('edit-labels').value = task.labels;
+            document.getElementById('edit-notes').value = task.notes;
+
+            bgModal.setAttribute('task-index', taskIndex);
+            bgModal.style.display = 'flex';
+            e.stopPropagation();
+        });
+
+        const deleteTask = createTextContainer('Delete', 'task-action');
+
+        deleteTask.addEventListener('click', function(e) {
+            const currProject = Project.getProject(onDisplayIndex);
+            const deleteIndex = this.parentElement.parentElement.getAttribute('task-index');
+            currProject.deleteTask(deleteIndex);
+            resetDisplay();
+            e.stopImmediatePropagation();
+        });
 
         container.append(checkbox);
         container.append(title);
@@ -245,8 +301,7 @@ const domManager = (function() {
     };
 
     return {
-        initDisplay,
-        createProjectElement
+        initDisplay
     };
 })();
 

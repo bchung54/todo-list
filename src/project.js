@@ -12,7 +12,7 @@ const Project = (function() {
                 tasks.push(item);
                 this.itemCount++;
             },
-            removeTask(index) {
+            deleteTask(index) {
                 tasks.splice(index, 1);
                 this.itemCount--;
             },

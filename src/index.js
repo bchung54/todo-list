@@ -5,9 +5,9 @@ import domManager from './domManager.js';
 import './style.css';
 
 
-const todo = createTask("Create webpage", '23', 3, ['school', 'work', 'play'], "All my life");
+const todo = createTask("Create webpage", '2022-06-07', 3, ['school', 'work', 'play'], "All my life");
 // todo.setDueDate(2, 23, 2022);
-const todo2 = createTask("Download more RAM", '42', 1, ['play'], "whats good");
+const todo2 = createTask("Download more RAM", '2021-08-10', 1, ['play'], "whats good");
 const todo3 = createTask("Play Solitaire");
 
 Project.addProject("Web Programming");

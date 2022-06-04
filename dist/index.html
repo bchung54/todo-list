@@ -30,8 +30,57 @@
                 </div>
                 <div class="sidebar-tab general-tab">Notes</div>
             </div>
-            <div class="project-container"></div>
+            <div class="display">
+                <form class="task-form">
+                    <input type="text" id="new-task" placeholder="New Task" required>
+                    <input type="date" id="new-task-dueDate">
+                    <fieldset id="new-priority">
+                        <legend>Priority</legend>
+                        <input type="radio" name="priority-new" value=0 id="pselect0" checked="checked">
+                        <label for="pselect0">None</label>
+                        <input type="radio" name="priority-new" value=1 id="pselect1">
+                        <label for="pselect1">1</label>
+                        <input type="radio" name="priority-new" value=2 id="pselect2">
+                        <label for="pselect2">2</label>
+                        <input type="radio" name="priority-new" value=3 id="pselect3">
+                        <label for="pselect3">3</label>
+                    </fieldset>
+                    <input type="text" id="new-task-labels" placeholder="Labels">
+                    <input type="text" id="new-task-notes" placeholder="Notes">
+                    <input type="submit" style="display: none">
+                </form>
+                <button class="add-task">+Add Task</button>
+            </div>
         </main>
+    </div>
+
+    <!-- Modal Section -->
+    <div class="bg-modal">
+        <div class="modal-content">
+            <div class="modal-header">Edit Task<div class="close">+</div></div>
+            <div class="modal-main">
+                <form class="edit-form">
+                    <input type="text" id="edit-task" placeholder="Edit Task" required>
+                    <input type="date" id="edit-date" value="2021-10-05">
+                    <fieldset id="edit-priority">
+                        <legend>Priority</legend>
+                        <input type="radio" name="priority-edit" value=0 id="pedit0">
+                        <label for="pselect0">None</label>
+                        <input type="radio" name="priority-edit" value=1 id="pedit1">
+                        <label for="pselect1">1</label>
+                        <input type="radio" name="priority-edit" value=2 id="pedit2">
+                        <label for="pselect2">2</label>
+                        <input type="radio" name="priority-edit" value=3 id="pedit3">
+                        <label for="pselect3">3</label>
+                    </fieldset>
+                    <label for="edit-labels">Labels: </label>
+                    <input type="text" id="edit-labels" placeholder="label-1,label-2,.... ">
+                    <label for="edit-notes">Notes: </label>
+                    <input type="textarea" id="edit-notes" placeholder="Type notes here...">
+                    <input type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

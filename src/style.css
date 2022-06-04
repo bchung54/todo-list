@@ -1,4 +1,144 @@
+html, body, main{
+    height: 100%;
+}
+
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 153, 255, 0.61);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    width: 60vw;
+    border: 4px solid black;
+}
+
+/* Header */
+
+header {
+    display: flex;
+    background-color: rgba(143, 5, 1, 0.61);
+}
+
+.logo {
+    display: flex;
+    background-color: red;
+    background:
+        linear-gradient(-45deg, transparent 30%, red 0);
+}
+
+.icon {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    /* position: relative;
+    top: -10vh;
+    left: -5vw;
+    transform: scale(0.3); */
+}
+
+.subtitle {
+    height: 50%;
+    width: 100%;
+    background-color: rgb(255, 145, 0);
+}
+
+/* Main: Sidebar and Project Display */
+
+main {
+    display: flex;
+    align-items: stretch;
+}
+
+main > * {
+    padding: 1em;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 15vw;
+    border: 4px solid white;
+}
+
+.sidebar > * {
+    margin: 1em;
+}
+
+.general-tab:hover, .sidebar-project:hover {
+    text-shadow: 2px 2px white;
+}
+
+.sidebar-project {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1em;
+    cursor: default;
+}
+
+.project-form {
+    display: none;
+}
+
+.add-project {
+    margin: 0 1em;
+}
+
+.delete-project {
+    display: none;
+}
+
+.sidebar-project:hover .delete-project {
+    display: block;
+}
+
+.delete-project:hover {
+    cursor: pointer;
+}
+
+.onDisplay {
+    background-color: rgba(122, 0, 153, 0.637);
+}
+
+/* Project Display */
+
+.task {
+    border: 2px solid white;
+}
+
+.task-header {
+    display: flex;
+    cursor: pointer;
+}
+
+.show-detail {
+    background-color: red;
+}
+
+.task-detail {
+    display: none;
+    overflow: hidden;
+    padding: 0 18px;
+    background-color: #f1f1f1;
+}
+
+.labels {
+    display: flex;
+}
+
+.notes {
+    display: flex;
+}
+
+.task-form {
+    display: none;
+}
+
+/* body {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 100vh;
     display: flex;
@@ -137,4 +277,4 @@ button {
 
 input:focus, textarea:focus, select:focus {
     outline: none;
-}
+} */

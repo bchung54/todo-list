@@ -5,13 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tododile</title>
+    <script src="./main.js" defer></script>
 </head>
 <body>
-    <div class='sidebar'>
-        <div class='sidebar-title'>Projects</div>
-        <div class='sidebar-container'></div>
+    <div id="content">
+        <header>
+            <div class="logo"><img src="../src/totodile-mini.jpg" alt="icon" class="icon">Tododile</div>
+            <div class="subtitle">For all your project crunching needs!</div>
+        </header>
+        <main>
+            <div class="sidebar">
+                <div class="sidebar-tab general-tab">Home</div>
+                <div class="sidebar-tab general-tab">Today</div>
+                <div class="sidebar-tab general-tab">Week</div>
+                <hr>
+                <div id="project-tab" class="sidebar-tab">
+                    Projects
+                    <div class="project-list"></div>
+                    <form class="project-form">
+                        <input type="text" id="new-project" placeholder="New Project">
+                        <input type="submit" style="display: none">
+                    </form>
+                    <button class="add-project">+ Add Project</button>
+                </div>
+                <div class="sidebar-tab general-tab">Notes</div>
+            </div>
+            <div class="project-container"></div>
+        </main>
     </div>
-    <div class='main'></div>
-    <script src="./main.js"></script>
 </body>
 </html>

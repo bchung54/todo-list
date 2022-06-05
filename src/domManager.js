@@ -1,4 +1,3 @@
-import { bg } from "date-fns/locale";
 import Project from "./project";
 import createTask from "./task";
 
@@ -7,9 +6,8 @@ const domManager = (function() {
     // DOM Elements
     const projectTab = document.getElementById('project-tab');
     const projectList = document.querySelector('.project-list');
-    const addProject = document.querySelector('.add-project');
+    const newProjectInput = document.querySelector('.new-project');
     const projectForm = document.querySelector('.project-form');
-    const newProjectInput = document.getElementById('new-project');
 
     const addTask = document.querySelector('.add-task');
     const taskForm = document.querySelector('.task-form');
@@ -33,12 +31,6 @@ const domManager = (function() {
 
         // Eventlisteners
         //
-        // Add project button
-        addProject.addEventListener('click', function() {
-            projectForm.style.display = 'block';
-            newProjectInput.select();
-        });
-
         // New project submitted
         projectForm.addEventListener('submit', function(e) {
             const newProjectIndex = Project.projectCount;
@@ -47,8 +39,6 @@ const domManager = (function() {
             projectList.append(createSidebarProject(newProjectInput.value, newProjectIndex));
             Project.addProject(newProjectInput.value);
             resetDisplay();
-            
-            this.style.display ='none';
             this.reset();
             e.preventDefault();
         });

@@ -1,3 +1,7 @@
+:root{
+    --background-light: rgb(91, 186, 250);
+}
+
 html, body, main{
     height: 100%;
 }
@@ -6,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 153, 255, 0.61);
+    background-color: var(--background-light);
 }
 
 #content {
@@ -80,12 +84,24 @@ main > * {
     cursor: default;
 }
 
-.project-form {
+/* .project-form {
     display: none;
+} */
+
+.new-project {
+    margin: 0 1em;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid black;
 }
 
-.add-project {
-    margin: 0 1em;
+.new-project:hover {
+    border-bottom: 2px solid red;
+}
+
+.new-project:focus {
+    outline: none;
+    box-shadow: 0 0 4px red;
 }
 
 .delete-project {

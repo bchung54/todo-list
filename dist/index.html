@@ -31,8 +31,11 @@
             </div>
             <div class="display">
                 <form class="task-form">
-                    <input type="text" id="new-task" placeholder="New Task" required>
-                    <input type="date" id="new-task-dueDate">
+                    <div class="taskform-line1">
+                        <input type="text" id="new-task" placeholder="New Task" required>
+                        <input type="date" id="new-task-dueDate">
+                        <div id="add-close" class="close">+</div>
+                    </div>
                     <fieldset id="new-priority">
                         <legend>Priority</legend>
                         <input type="radio" name="priority-new" value=0 id="pselect0" checked="checked">
@@ -44,19 +47,19 @@
                         <input type="radio" name="priority-new" value=3 id="pselect3">
                         <label for="pselect3">3</label>
                     </fieldset>
-                    <input type="text" id="new-task-labels" placeholder="Labels">
-                    <input type="text" id="new-task-notes" placeholder="Notes">
-                    <input type="submit" style="display: none">
+                    <input type="text" id="new-task-labels" placeholder="Labels (optional)">
+                    <input type="text" id="new-task-notes" placeholder="Notes (optional)">
+                    <input type="submit" value="Add Task">
                 </form>
-                <button class="add-task">+Add Task</button>
+                <button class="add-task">+</button>
             </div>
         </main>
     </div>
 
-    <!-- Modal Section -->
+    <!-- Modal Section: Edit Task Form -->
     <div class="bg-modal">
         <div class="modal-content">
-            <div class="modal-header">Edit Task<div class="close">+</div></div>
+            <div class="modal-header">Edit Task<div id="edit-close" class="close">+</div></div>
             <div class="modal-main">
                 <form class="edit-form">
                     <input type="text" id="edit-task" placeholder="Edit Task" required>

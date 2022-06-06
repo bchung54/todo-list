@@ -17,9 +17,10 @@ const domManager = (function() {
     const projectDisplay = document.querySelector('.display');
 
     const editForm = document.querySelector('.edit-form');
+    const addClose = document.getElementById('add-close');
 
     const bgModal = document.querySelector('.bg-modal');
-    const modalClose = document.querySelector('.close');
+    const modalClose = document.getElementById('edit-close');
     const modalContent = document.querySelector('.modal-content');
     
     let onDisplayIndex = 0;
@@ -54,9 +55,14 @@ const domManager = (function() {
         });
 
         addTask.addEventListener('click', function() {
-            taskForm.style.display = 'block';
+            taskForm.style.display = 'flex';
             newTaskInput.select();
         });
+
+        addClose.addEventListener('click', function() {
+            taskForm.style.display = 'none';
+            taskForm.reset();
+        })
 
         taskForm.addEventListener('submit', function(e) {
             const title = document.getElementById('new-task').value;

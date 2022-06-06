@@ -84,6 +84,7 @@ main > * {
     cursor: default;
 }
 
+<<<<<<< HEAD
 .new-project {
     margin: 0 1em;
     background-color: transparent;
@@ -91,6 +92,19 @@ main > * {
     border-bottom: 2px solid black;
 }
 
+=======
+/* .project-form {
+    display: none;
+} */
+
+.new-project {
+    margin: 0 1em;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid black;
+}
+
+>>>>>>> sidebar-input
 .new-project:hover {
     border-bottom: 2px solid red;
 }

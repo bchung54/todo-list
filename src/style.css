@@ -1,5 +1,33 @@
+@font-face {
+    font-family: PokemonSolid;
+    src: url(pokemon/Pokemon\ Solid.ttf);
+}
+
+@font-face {
+    font-family: PokemonHollow;
+    src: url(pokemon/Pokemon\ Hollow.ttf);
+}
+
+@font-face {
+    font-family: PokemonText;
+    src: url(PokemonGb-RAeo.ttf);
+}
+
+@font-face {
+    font-family: BubbleRainbow;
+    src: url(BubbleRainbow-VGdn0.ttf);
+}
+
 :root{
-    --background-light: rgb(91, 186, 250);
+    --background-light:  #bc1828;
+    --header-accent: #bc1828;
+    --bright-yellow-accent: #efe74a;
+    --light-blue-accent: #6bb5e7;
+    --dark-blue-accent: #3184c6;
+    --dark-orange-accent: #cc4121;
+    --logo-yellow: #ffcb05;
+    --logo-blue: #3c5aa6;
+    --logo-dark-blue: #0a285f;
 }
 
 html, body, main{
@@ -10,35 +38,52 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--background-light);
+    background-image: url(./forest-background-comic-vine.jpg);
+    background-size: cover;
+    font-size: 2rem;
 }
 
 #content {
     display: flex;
     flex-direction: column;
-    height: 60vh;
-    width: 60vw;
-    border: 4px solid black;
+    height: 70vh;
+    width: 70vw;
+    background-color: var(--header-accent);
+    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.596);
 }
 
 /* Header */
 
 header {
     display: flex;
-    background-color: rgba(143, 5, 1, 0.61);
+    height: 15rem;
+    background-color: var(--background-light);
 }
 
 .logo {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 35vw;
     background-color: red;
     background:
-        linear-gradient(-45deg, transparent 30%, red 0);
+        linear-gradient(-30deg, transparent 4.4rem, red 0);
+}
+
+h1, h2 {
+    font-family: PokemonSolid, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-shadow: -.5rem .3rem var(--logo-dark-blue);
+    -webkit-text-fill-color: var(--logo-yellow);
+    -webkit-text-stroke: 0.25rem var(--logo-blue);
 }
 
 .icon {
     border-radius: 50%;
+    border: 0.25rem solid white;
     height: 100px;
     width: 100px;
+    background-color: rgb(0, 204, 255);
     /* position: relative;
     top: -10vh;
     left: -5vw;
@@ -46,9 +91,17 @@ header {
 }
 
 .subtitle {
-    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 57%;
     width: 100%;
-    background-color: rgb(255, 145, 0);
+    background-color: red;
+    font-family: BubbleRainbow, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2.25rem;
+    text-shadow: -0.1rem 0.1rem var(--logo-dark-blue);
+    color: white;
+    -webkit-text-stroke: 0.15rem var(--logo-blue);
 }
 
 /* Main: Sidebar and Project Display */
@@ -62,56 +115,78 @@ main > * {
     padding: 1em;
 }
 
+hr {
+    width: 60%;
+    height: 1px;
+    border: 2px solid var(--light-blue-accent);
+    background-color: var(--light-blue-accent);
+}
+
 /* Sidebar */
 
 .sidebar {
-    width: 15vw;
-    border: 4px solid white;
+    flex: 1;
+    width: 20vw;
+    padding-right: 0; 
+    border-right: 3px solid var(--dark-blue-accent);
+    background-color: #bc1828;
+    color: var(--bright-yellow-accent);
+    font-family: PokemonSolid;
+    font-size: 1.75rem;
 }
 
 .sidebar > * {
-    margin: 1em;
+    margin: 0.5rem 0 0.5rem 0.5rem;
+    text-shadow: -0.25rem 0.25rem 0.25rem var(--logo-dark-blue);
+}
+
+.sidebar-tab {
+    padding: 0.5rem;
+    padding-right: 0;
+    border-radius: 1rem;
+    cursor: default;
 }
 
 .general-tab:hover, .sidebar-project:hover {
-    text-shadow: 2px 2px white;
+    border: 0.2rem solid var(--dark-blue-accent);
 }
 
 .sidebar-project {
     display: flex;
     justify-content: space-between;
-    margin: 0 1em;
+    margin-left: 1.5rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    padding: 0.5rem;
+    padding-right: 0;
     cursor: default;
 }
 
-<<<<<<< HEAD
 .new-project {
-    margin: 0 1em;
+    margin-left: 1rem;
     background-color: transparent;
+    color: var(--bright-yellow-accent);
     border: 0;
-    border-bottom: 2px solid black;
+    border-bottom: 0.2rem solid var(--light-blue-accent);
+    font-size: 1.5rem;
 }
 
-=======
-/* .project-form {
-    display: none;
-} */
-
-.new-project {
-    margin: 0 1em;
-    background-color: transparent;
-    border: 0;
-    border-bottom: 2px solid black;
+.new-project::placeholder {
+    color: var(--logo-dark-blue);
+    -webkit-text-stroke: 0.05rem var(--logo-dark-blue);
+    font-family: PokemonHollow, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
->>>>>>> sidebar-input
 .new-project:hover {
-    border-bottom: 2px solid red;
+    border-bottom: 0.3rem solid var(--bright-yellow-accent);
 }
 
 .new-project:focus {
     outline: none;
-    box-shadow: 0 0 4px red;
+    box-shadow: 0 0 2rem var(--bright-yellow-accent);
+    background-color: var(--dark-blue-accent);
+    border-radius: 0.5rem;
+    border-bottom: 0.3rem solid var(--bright-yellow-accent);
 }
 
 .delete-project {
@@ -127,18 +202,43 @@ main > * {
 }
 
 .onDisplay {
-    background-color: rgba(122, 0, 153, 0.637);
+    background-color: var(--dark-blue-accent);
+}
+
+.project-form {
+    margin: 0.5rem;
 }
 
 /* Project Display */
 
+h2 {
+    text-align: center;
+    margin: 0;
+}
+
 .display {
     position: relative;
+    flex: 3;
     width: 100%;
 }
 
+.project-element > hr {
+    margin-top: 0;
+}
+
 .task {
-    border: 2px solid white;
+    border: 0.2rem solid white;
+    border-radius: 0.5rem;
+    font-family: PokemonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.25rem;
+    color: white;
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.task:hover {
+    border-color: black;
+    color: black;
 }
 
 .task-header {
@@ -147,6 +247,11 @@ main > * {
 }
 .task-action:hover {
     text-shadow: 2px 2px white;
+}
+
+input[type='checkbox'] {
+    margin-right: 1rem;
+    transform: scale(1.5);
 }
 
 input[type='checkbox']:checked ~ *:not(.task-action) {
@@ -189,11 +294,13 @@ input[type='checkbox']:checked ~ *:not(.task-action) {
     height: 40px;
     width: 40px;
     top: 85%;
-    left: 85%;
+    left: 90%;
     border-radius: 50%;
     border: none;
     font-size: 50px;
+    font-weight: bolder;
     transform: scale(2);
+    cursor: pointer;
 }
 
 /* Edit Task Modal */

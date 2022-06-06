@@ -130,7 +130,7 @@ const domManager = (function() {
             displayProject(onDisplayIndex);
         });
 
-        const deleteProject = createTextContainer('delete', 'delete-project')
+        const deleteProject = createTextContainer('delete', 'material-icons');
         
         deleteProject.addEventListener('click', function(e) {
             const parentElement = this.parentElement;
@@ -195,7 +195,7 @@ const domManager = (function() {
     };
 
     function toggleDetails() {
-        this.classList.toggle('show-detail');
+        this.parentElement.classList.toggle('show-detail');
         let content = this.nextElementSibling;
         if (content.style.display === 'block') {
             content.style.display = 'none';
@@ -218,16 +218,15 @@ const domManager = (function() {
             e.stopPropagation();
         });
 
-        const title = document.createElement('div');
-        title.textContent = task.title;
+        const title = createTextContainer(task.title, 'task-title');
+        const date = createTextContainer(`Due: ${task.getDueDate()}`, 'task-duedate');
 
-        const date = document.createElement('div');
-        date.textContent = "Due: " + task.getDueDate();
+        const taskActions = createContainer('task-action');
 
-        const editTask = createTextContainer('Edit', 'task-action');
+        const editTask = createTextContainer('edit_note', 'material-icons');
 
         editTask.addEventListener('click', function(e) {
-            const taskIndex = this.parentElement.parentElement.getAttribute('task-index');
+            const taskIndex = this.parentElement.parentElement.parentElement.getAttribute('task-index');
             const task = Project.getProject(onDisplayIndex).getTask(taskIndex);
             document.getElementById('edit-task').value = task.title;
             document.getElementById('edit-date').value = task.dueDate;
@@ -240,7 +239,7 @@ const domManager = (function() {
             e.stopPropagation();
         });
 
-        const deleteTask = createTextContainer('Delete', 'task-action');
+        const deleteTask = createTextContainer('delete', 'material-icons');
 
         deleteTask.addEventListener('click', function(e) {
             const currProject = Project.getProject(onDisplayIndex);
@@ -250,11 +249,13 @@ const domManager = (function() {
             e.stopImmediatePropagation();
         });
 
+        taskActions.append(editTask);
+        taskActions.append(deleteTask);
+
         container.append(checkbox);
         container.append(title);
         container.append(date);
-        container.append(editTask);
-        container.append(deleteTask);
+        container.append(taskActions);
         return container;
     };
 

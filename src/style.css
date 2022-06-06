@@ -189,15 +189,19 @@ hr {
     border-bottom: 0.3rem solid var(--bright-yellow-accent);
 }
 
-.delete-project {
+.material-icons {
     display: none;
+    padding-top: 0.3rem;
+    padding-right: 0.3rem;
+    color: var(--bright-yellow-accent);
+    transform: scale(1.5);
 }
 
-.sidebar-project:hover .delete-project {
+.sidebar-project:hover .material-icons {
     display: block;
 }
 
-.delete-project:hover {
+.material-icons:hover {
     cursor: pointer;
 }
 
@@ -241,12 +245,37 @@ h2 {
     color: black;
 }
 
+.task:hover .material-icons {
+    display: block;
+}
+
 .task-header {
+    position: relative;
     display: flex;
     cursor: pointer;
 }
-.task-action:hover {
-    text-shadow: 2px 2px white;
+
+.task-title {
+    margin-top: 0.25rem;
+}
+
+.task-duedate {
+    position: absolute;
+    top: 25%;
+    left: 60%;
+    font-size: 1rem;;
+}
+
+.task-action {
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    top: -30%;
+    right: 2%;
+}
+
+.task-action > *:hover {
+    -webkit-text-stroke: 0.05rem black;
 }
 
 input[type='checkbox'] {
@@ -259,14 +288,20 @@ input[type='checkbox']:checked ~ *:not(.task-action) {
 }
 
 .show-detail {
-    background-color: red;
+    background-color: var(--light-blue-accent);
+    color: black;
 }
 
 .task-detail {
     display: none;
     overflow: hidden;
-    padding: 0 18px;
+    padding: 1rem 0.25rem;
+    margin: 0.5rem;
     background-color: #f1f1f1;
+}
+
+.task-detail > * {
+    padding: 0.5rem;
 }
 
 .labels {

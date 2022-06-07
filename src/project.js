@@ -1,4 +1,4 @@
-import domManager from "./domManager";
+import { format } from 'date-fns';
 
 const Project = (function() {
     let projects = [];
@@ -41,12 +41,46 @@ const Project = (function() {
         return projects[index];
     };
 
+    function getTasks(tabName) {
+        let listAll = [];
+        projects.forEach(function(project) {
+            switch (tabName) {
+                case "Home":
+                    for (let i = 0; i < project.itemCount; i++) {
+                        listAll.push(project.getTask(i));
+                    };
+                    break;
+                case "Today":
+                    for (let i = 0; i < project.itemCount; i++) {
+                        const today = new Date();
+                        if (project.getTask(i).getDueDate() == format(today, 'MM/dd/yyyy')) {
+                            listAll.push(project.getTask(i));
+                        };
+                    };
+                    break;
+                case "Week":
+                    for (let i = 0; i < project.itemCount; i++) {
+                        const nextWeek = new Date();
+                        nextWeek.setDate(nextWeek.getDate() + 7);
+                        if (project.getTask(i).getDueDate() <= format(nextWeek, 'MM/dd/yyyy')) {
+                            listAll.push(project.getTask(i));
+                        };
+                    };
+                    break;
+            }
+            
+        });
+
+        return listAll;
+    };
+
     return {
         get projectList() {return projects},
         get projectCount() {return projects.length},
         addProject,
         deleteProject,
-        getProject
+        getProject,
+        getTasks
     }
 })();
 

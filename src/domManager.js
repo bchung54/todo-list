@@ -4,7 +4,7 @@ import createTask from "./task";
 const domManager = (function() {
 
     // DOM Elements
-    // const projectTab = document.getElementById('project-tab');
+    const generalTabs = document.querySelectorAll('.general-tab');
     const projectList = document.querySelector('.project-list');
     const newProjectInput = document.querySelector('.new-project');
     const projectForm = document.querySelector('.project-form');
@@ -12,7 +12,7 @@ const domManager = (function() {
     const addTask = document.querySelector('.add-task');
     const taskForm = document.querySelector('.task-form');
     const newTaskInput = document.getElementById('new-task');
-    const projectDisplay = document.querySelector('.display');
+    const mainDisplay = document.querySelector('.display');
 
     const editForm = document.querySelector('.edit-form');
     const addClose = document.getElementById('add-close');
@@ -31,6 +31,12 @@ const domManager = (function() {
 
         // Eventlisteners
         //
+        generalTabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                displayGeneralTab(this);
+            });
+        });
+
         // New project submitted
         projectForm.addEventListener('submit', function(e) {
             // Update index for current project on display to the added project
@@ -63,7 +69,7 @@ const domManager = (function() {
         taskForm.addEventListener('submit', function(e) {
             const title = document.getElementById('new-task').value;
             const dueDate = document.getElementById('new-task-dueDate').value;
-            const priority = document.querySelector('input[name="priority"]:checked').value;
+            const priority = document.querySelector('input[name="priority-new"]:checked').value;
             const labels = [document.getElementById('new-task-labels').value];
             const notes = document.getElementById('new-task-notes').value;
             const currProject = Project.getProject(onDisplayIndex);
@@ -82,11 +88,11 @@ const domManager = (function() {
         // Submit updated task information
         editForm.addEventListener('submit', function(e) {
             const task = Project.getProject(onDisplayIndex).getTask(bgModal.getAttribute('task-index'));
-            
+
             // Update all information for the task
             task.title = document.getElementById('edit-task').value;
             task.setDueDate(document.getElementById('edit-date').value);
-            task.priority = document.querySelector('input[type=radio][name=priority-edit]:checked').value;
+            task.priority = document.querySelector('input[name="priority-edit"]:checked').value;
             task.labels = document.getElementById('edit-labels').value.split(',');
             task.notes = document.getElementById('edit-notes').value;
 
@@ -117,7 +123,7 @@ const domManager = (function() {
         if (Project.projectCount != 0) { displayProjectList() };
 
         // Remove the project element in project display
-        if (projectDisplay.hasChildNodes()) { projectDisplay.removeChild(projectDisplay.firstChild) };
+        if (mainDisplay.hasChildNodes()) { mainDisplay.removeChild(mainDisplay.firstChild) };
 
         // Repopulate project display with current project
         if (document.querySelector('.onDisplay')) { displayProject(onDisplayIndex) };
@@ -136,6 +142,47 @@ const domManager = (function() {
         textContainer.classList.add(className);
         textContainer.textContent = text;
         return textContainer;
+    };
+
+    // General Tab Display Functions
+
+    function displayGeneralTab(tab) {
+        if (mainDisplay.querySelector('.display-element')) {
+            mainDisplay.removeChild(mainDisplay.querySelector('.display-element'));
+        };
+        mainDisplay.prepend(createDisplayElement(tab));
+
+    };
+
+    function createDisplayElement(tab) {
+        const container = createContainer('display-element');
+
+        const titleElement = document.createElement('h2');
+        switch (tab.textContent) {
+            case "Home":
+                titleElement.textContent = "All Tasks";
+                break;
+            case "Today":
+                titleElement.textContent = "Tasks Within the Day";
+                break;
+            case "Week":
+                titleElement.textContent = "Tasks Within the Week";
+                break;
+        }
+
+        const taskList = document.createElement('div');
+        taskList.classList.add('task-list');
+
+        const allTasks = Project.getTasks(tab.textContent);
+        for (let i = 0; i < allTasks.length; i++) {
+            const element = createTaskElement(allTasks[i], i);
+            taskList.append(element);
+        };
+
+        container.append(titleElement);
+        container.append(document.createElement('hr'));
+        container.append(taskList);
+        return container;
     };
 
     // Sidebar Display Functions
@@ -159,7 +206,7 @@ const domManager = (function() {
             onDisplayIndex = parseInt(this.getAttribute('project-index'));
             
             // Remove project on display and replace with next project to be displayed
-            projectDisplay.removeChild(projectDisplay.firstChild);
+            mainDisplay.removeChild(mainDisplay.firstChild);
             displayProject(onDisplayIndex);
         });
 
@@ -190,18 +237,18 @@ const domManager = (function() {
         return container;
     };
 
-    // Project Display Runctions
+    // Project Display Functions
 
     function displayProject(index) {
-        if (projectDisplay.querySelector('.project-element')) {
-            projectDisplay.removeChild(projectDisplay.querySelector('.project-element'));
+        if (mainDisplay.querySelector('.display-element')) {
+            mainDisplay.removeChild(mainDisplay.querySelector('.display-element'));
         }
-        projectDisplay.prepend(createProjectElement(Project.getProject(index)));
+        mainDisplay.prepend(createProjectElement(Project.getProject(index)));
 
     };
 
     function createProjectElement(project) {
-        const container = createContainer('project-element');
+        const container = createContainer('display-element');
 
         const titleElement = document.createElement('h2');
         titleElement.textContent = project.title;
@@ -265,8 +312,9 @@ const domManager = (function() {
             const taskIndex = this.parentElement.parentElement.parentElement.getAttribute('task-index');
             const task = Project.getProject(onDisplayIndex).getTask(taskIndex);
             document.getElementById('edit-task').value = task.title;
-            document.getElementById('edit-date').value = task.dueDate;
-            document.getElementById(`pedit${task.priority}`).checked = 'checked';
+            document.getElementById('edit-date').value = task.dueDateInput;
+            // document.getElementById(`pedit${task.priority}`).checked = "checked";
+            document.getElementById(`pedit${task.priority}`).setAttribute('checked', 'checked');
             document.getElementById('edit-labels').value = task.labels;
             document.getElementById('edit-notes').value = task.notes;
 

@@ -62,7 +62,7 @@ h1, h2 {
     font-family: PokemonSolid, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-shadow: -.5rem .3rem var(--logo-dark-blue);
     -webkit-text-fill-color: var(--logo-yellow);
-    -webkit-text-stroke: 0.25rem var(--logo-blue);
+    -webkit-text-stroke: 0.2rem var(--logo-blue);
 }
 
 .icon {
@@ -92,6 +92,10 @@ h1, h2 {
 main {
     display: flex;
     align-items: stretch;
+}
+
+.display-element {
+    overflow-y: auto;
 }
 
 main > * {
@@ -212,7 +216,7 @@ h2 {
     width: 100%;
 }
 
-.project-element > hr {
+.display-element > hr {
     width: 30%;
     margin-top: 0;
     margin-bottom: 2rem;
@@ -395,18 +399,17 @@ label[for=new-task-notes] {
 }
 
 /* .priority-0 {
-    background-color: white;
-}
+    border-left: 5px solid var(--light-blue-accent);
+} */
 
 .priority-1 {
-    background-color: #ffc552;
+    box-shadow: -0.5rem 0 0 var(--light-blue-accent);
 }
 
 .priority-2 {
-    background-color: #e67b7b;
+    box-shadow: -0.5rem 0 0 greenyellow;
 }
 
 .priority-3 {
-    background-color: #7b1800;
-    color: white;
-} */
+    box-shadow: -0.5rem 0 0 #ffc552;;
+}

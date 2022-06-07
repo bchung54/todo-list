@@ -45,7 +45,7 @@ const domManager = (function() {
         });
 
         addTask.addEventListener('click', function() {
-            taskForm.style.display = 'flex';
+            taskForm.style.display = 'block';
             newTaskInput.select();
         });
 

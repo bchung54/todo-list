@@ -213,7 +213,9 @@ h2 {
 }
 
 .project-element > hr {
+    width: 30%;
     margin-top: 0;
+    margin-bottom: 2rem;
 }
 
 .task {
@@ -248,7 +250,7 @@ h2 {
 .task-duedate {
     position: absolute;
     top: 25%;
-    left: 60%;
+    left: 65%;
     font-size: 1rem;;
 }
 

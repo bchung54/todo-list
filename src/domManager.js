@@ -4,7 +4,7 @@ import createTask from "./task";
 const domManager = (function() {
 
     // DOM Elements
-    const projectTab = document.getElementById('project-tab');
+    // const projectTab = document.getElementById('project-tab');
     const projectList = document.querySelector('.project-list');
     const newProjectInput = document.querySelector('.new-project');
     const projectForm = document.querySelector('.project-form');
@@ -23,69 +23,86 @@ const domManager = (function() {
     
     let onDisplayIndex = 0;
 
-    // Helpers
+    // Display Functions
+
     function initDisplay() {
         displayProjectList();
         displayProject(0);
-
-        
 
         // Eventlisteners
         //
         // New project submitted
         projectForm.addEventListener('submit', function(e) {
-            const newProjectIndex = Project.projectCount;
-            onDisplayIndex = newProjectIndex;
+            // Update index for current project on display to the added project
+            onDisplayIndex = Project.projectCount;
 
-            projectList.append(createSidebarProject(newProjectInput.value, newProjectIndex));
+            // Add the new project to the HTML and Project module
+            projectList.append(createSidebarProject(newProjectInput.value, onDisplayIndex));
             Project.addProject(newProjectInput.value);
+
+            // Reset display and reset form values
             resetDisplay();
             this.reset();
+
             e.preventDefault();
         });
-
+        
+        // Show form for adding tasks
         addTask.addEventListener('click', function() {
             taskForm.style.display = 'block';
             newTaskInput.select();
         });
 
+        // Close add task form and reset values
         addClose.addEventListener('click', function() {
             taskForm.style.display = 'none';
             taskForm.reset();
         })
 
+        // Submit new task information
         taskForm.addEventListener('submit', function(e) {
             const title = document.getElementById('new-task').value;
             const dueDate = document.getElementById('new-task-dueDate').value;
             const priority = document.querySelector('input[name="priority"]:checked').value;
             const labels = [document.getElementById('new-task-labels').value];
             const notes = document.getElementById('new-task-notes').value;
-            
             const currProject = Project.getProject(onDisplayIndex);
+            
+            // Add information to new project
             currProject.addTask(createTask(title, dueDate, priority, labels, notes));
+            
+            // Close form and reset display
             this.style.display = 'none';
             this.reset();
             resetDisplay();
+            
             e.preventDefault();
         });
 
+        // Submit updated task information
         editForm.addEventListener('submit', function(e) {
             const task = Project.getProject(onDisplayIndex).getTask(bgModal.getAttribute('task-index'));
+            
+            // Update all information for the task
             task.title = document.getElementById('edit-task').value;
             task.setDueDate(document.getElementById('edit-date').value);
             task.priority = document.querySelector('input[type=radio][name=priority-edit]:checked').value;
             task.labels = document.getElementById('edit-labels').value.split(',');
             task.notes = document.getElementById('edit-notes').value;
 
+            // Close form and reset display
             bgModal.style.display = 'none';
             resetDisplay();
+            
             e.preventDefault();
         });
 
+        // Close forms through the X button
         modalClose.addEventListener('click', () => { bgModal.style.display = 'none' })
         bgModal.addEventListener('click', () => { bgModal.style.display = 'none' });
+
+        // Stop propogation for modal clicks
         modalContent.addEventListener('click', (e) => {
-            // e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
             return false;
@@ -93,12 +110,20 @@ const domManager = (function() {
     };
 
     function resetDisplay() {
+        // Remove all items in project list from sidebar
         while (projectList.hasChildNodes()) { projectList.removeChild(projectList.firstChild) };
+
+        // Repopulate project list in sidebar
         if (Project.projectCount != 0) { displayProjectList() };
 
+        // Remove the project element in project display
         if (projectDisplay.hasChildNodes()) { projectDisplay.removeChild(projectDisplay.firstChild) };
+
+        // Repopulate project display with current project
         if (document.querySelector('.onDisplay')) { displayProject(onDisplayIndex) };
     }
+
+    // Helper functions: Container builders
 
     function createContainer(...args) {
         const container = document.createElement('div');
@@ -107,35 +132,45 @@ const domManager = (function() {
     };
     
     function createTextContainer(text, className) {
-        const textContainer = createContainer(className);
+        const textContainer = document.createElement('span');
+        textContainer.classList.add(className);
         textContainer.textContent = text;
         return textContainer;
     };
 
-    // Sidebar Display functions
+    // Sidebar Display Functions
+
     function displayProjectList() {
         Project.projectList.forEach((element, index) => {projectList.append(createSidebarProject(element.title, index))})
     };
 
     function createSidebarProject(title, index) {
+        // Create container for the sidebar project list item
         const container = createTextContainer(title, 'sidebar-project');
         container.setAttribute('project-index', index);
         if (index == onDisplayIndex) {container.classList.add('onDisplay')};
 
         container.addEventListener('click', function() {
+            // Switch onDisplay class name to next element
             document.querySelector('.onDisplay').classList.remove('onDisplay');
             this.classList.add('onDisplay');
+            
+            // Update index of project to be displayed
             onDisplayIndex = parseInt(this.getAttribute('project-index'));
+            
+            // Remove project on display and replace with next project to be displayed
             projectDisplay.removeChild(projectDisplay.firstChild);
             displayProject(onDisplayIndex);
         });
 
+        // Create the delete button for the project list item
         const deleteProject = createTextContainer('delete', 'material-icons');
         
         deleteProject.addEventListener('click', function(e) {
             const parentElement = this.parentElement;
             const deleteIndex = parentElement.getAttribute('project-index');
 
+            // Update display index based on current value and the project that is being deleted
             if (deleteIndex <= onDisplayIndex) {
                 onDisplayIndex--;
                 if (deleteIndex == onDisplayIndex == -1) {
@@ -143,6 +178,7 @@ const domManager = (function() {
                 }
             };
             
+            // Remove project from the Project module and from the HTML document
             Project.deleteProject(deleteIndex);
             projectList.removeChild(parentElement);
 
@@ -154,7 +190,8 @@ const domManager = (function() {
         return container;
     };
 
-    // Project Display functions
+    // Project Display Runctions
+
     function displayProject(index) {
         if (projectDisplay.querySelector('.project-element')) {
             projectDisplay.removeChild(projectDisplay.querySelector('.project-element'));
@@ -221,10 +258,9 @@ const domManager = (function() {
         const title = createTextContainer(task.title, 'task-title');
         const date = createTextContainer(`Due: ${task.getDueDate()}`, 'task-duedate');
 
+
         const taskActions = createContainer('task-action');
-
         const editTask = createTextContainer('edit_note', 'material-icons');
-
         editTask.addEventListener('click', function(e) {
             const taskIndex = this.parentElement.parentElement.parentElement.getAttribute('task-index');
             const task = Project.getProject(onDisplayIndex).getTask(taskIndex);
@@ -240,7 +276,6 @@ const domManager = (function() {
         });
 
         const deleteTask = createTextContainer('delete', 'material-icons');
-
         deleteTask.addEventListener('click', function(e) {
             const currProject = Project.getProject(onDisplayIndex);
             const deleteIndex = this.parentElement.parentElement.getAttribute('task-index');

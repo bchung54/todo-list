@@ -1,9 +1,9 @@
 # Tododile
-A themed to-do to keep track of tasks and filter them by due date, priority and labels.
+A themed to-do to keep track of tasks and filter them by due date (priority and labels in future).
 
 TODO:
     Diplay tweaks - fix up display of forms, display priorities better, implement scrolling (add button overlaid)
-    Functionality - In-depth sort/filter function (by label or priortity), 
+    Functionality - In-depth sort/filter function (by label or priortity)
 
 [Live Preview](https://bchung54.github.io/todo-list/)
 

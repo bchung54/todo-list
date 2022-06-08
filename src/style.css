@@ -337,7 +337,7 @@ label[for=new-task-notes] {
     vertical-align: top;
 }
 .add-task {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;

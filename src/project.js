@@ -3,10 +3,14 @@ import { format } from 'date-fns';
 const Project = (function() {
     let projects = [];
 
-    function createProject(title, desc=null) {
-        let tasks = [];
+    function createProject(title, desc=null) { return from({ title, desc }) };
+
+    function from(state) {
+        const { tasks = [], title, desc } = state || {};
         let itemCount = tasks.length;
         return {
+            title,
+            desc,
             itemCount,
             addTask(item) {
                 tasks.push(item);
@@ -16,20 +20,13 @@ const Project = (function() {
                 tasks.splice(index, 1);
                 this.itemCount--;
             },
-            getTask(index) {
-                return tasks[index];
-            },
-    
-            get desc() {return desc},
-            get title() {return title},
-    
-            set desc(string) {desc = string},
-            set title(string) {title = string}
+            getTask(index) { return tasks[index] },
+            toJson() { return tasks },
         }
     };
 
-    function addProject(...args) {
-        const project = createProject(args[0], args[1]);
+    function addProject(state) {
+        const project = from(state);
         projects.push(project);
     };
 
@@ -75,8 +72,10 @@ const Project = (function() {
     };
 
     return {
+        from,
         get projectList() {return projects},
         get projectCount() {return projects.length},
+        createProject,
         addProject,
         deleteProject,
         getProject,

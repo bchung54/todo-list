@@ -1,5 +1,5 @@
 import Project from "./project";
-import createTask from "./task";
+import { createTask } from "./task";
 
 const domManager = (function() {
 
@@ -26,8 +26,11 @@ const domManager = (function() {
     // Display Functions
 
     function initDisplay() {
-        displayProjectList();
-        displayProject(0);
+        if (Project.projectCount > 0) {
+            displayProjectList();
+            displayProject(0);
+            addTask.style.display = 'flex';
+        }
 
         // Eventlisteners
         //
@@ -44,7 +47,8 @@ const domManager = (function() {
 
             // Add the new project to the HTML and Project module
             projectList.append(createSidebarProject(newProjectInput.value, onDisplayIndex));
-            Project.addProject(newProjectInput.value);
+            Project.addProject(Project.createProject(newProjectInput.value));
+            addTask.style.display = 'flex';
 
             // Reset display and reset form values
             resetDisplay();
@@ -225,9 +229,15 @@ const domManager = (function() {
                 }
             };
             
-            // Remove project from the Project module and from the HTML document
+            // Remove project from the Project module, from the HTML document, and from Local Storage
             Project.deleteProject(deleteIndex);
             projectList.removeChild(parentElement);
+            if (localStorage.hasOwnProperty(`projects-${deleteIndex}`)) { 
+                localStorage.removeItem(`projects-${deleteIndex}`);
+                localStorage.removeItem(`tasks-${deleteIndex}`);
+            };
+
+            if (Project.projectCount == 0) {addTask.style.display = 'none'};
 
             resetDisplay();
             e.stopImmediatePropagation();
@@ -313,7 +323,6 @@ const domManager = (function() {
             const task = Project.getProject(onDisplayIndex).getTask(taskIndex);
             document.getElementById('edit-task').value = task.title;
             document.getElementById('edit-date').value = task.dueDateInput;
-            // document.getElementById(`pedit${task.priority}`).checked = "checked";
             document.getElementById(`pedit${task.priority}`).setAttribute('checked', 'checked');
             document.getElementById('edit-labels').value = task.labels;
             document.getElementById('edit-notes').value = task.notes;
@@ -328,6 +337,9 @@ const domManager = (function() {
             const currProject = Project.getProject(onDisplayIndex);
             const deleteIndex = this.parentElement.parentElement.getAttribute('task-index');
             currProject.deleteTask(deleteIndex);
+            if (localStorage.hasOwnProperty(`tasks-${onDisplayIndex}`)) { 
+                localStorage.setItem(`tasks-${onDisplayIndex}`, JSON.stringify(currProject.toJson()));
+            };
             resetDisplay();
             e.stopImmediatePropagation();
         });
@@ -381,7 +393,8 @@ const domManager = (function() {
     };
 
     return {
-        initDisplay
+        initDisplay,
+        onDisplayIndex
     };
 })();
 

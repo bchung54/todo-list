@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tododile</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    <div id="content">
+        <header>
+            <div class="logo">
+                <img src="../src/images/pngkey.com-totodile-png-484224.png" alt="icon" class="icon">
+                <h1>ToDodile</h1>
+            </div>
+            <span class="subtitle">For all your project crunching needs!</span>
+        </header>
+        <main>
+            <div class="sidebar">
+                <div class="sidebar-tab general-tab">Home</div>
+                <div class="sidebar-tab general-tab">Today</div>
+                <div class="sidebar-tab general-tab">Week</div>
+                <hr>
+                <div id="project-tab" class="sidebar-tab">
+                    Projects
+                    <div class="project-list"></div>
+                    <form class="project-form">
+                        <input type="text" class="new-project" placeholder="+ New Project">
+                        <input type="submit" style="display: none">
+                    </form>
+                </div>
+            </div>
+            <div class="display">
+                <form class="task-form">
+                    <div class="taskform-line1">
+                        <input type="text" id="new-task" placeholder="New Task" required>
+                        <input type="date" id="new-task-dueDate">
+                        <div id="add-close" class="close">+</div>
+                    </div>
+                    <div id="new-priority">
+                        <span>Priority: </span>
+                        <input type="radio" name="priority-new" value=0 id="pselect0" checked="checked">
+                        <label for="pselect0">None</label>
+                        <input type="radio" name="priority-new" value=1 id="pselect1">
+                        <label for="pselect1">Low</label>
+                        <input type="radio" name="priority-new" value=2 id="pselect2">
+                        <label for="pselect2">Med</label>
+                        <input type="radio" name="priority-new" value=3 id="pselect3">
+                        <label for="pselect3">High</label>
+                    </div>
+                    <label for="new-task-labels">Labels:</label>
+                    <input type="text" id="new-task-labels" placeholder="Labels (optional)">
+                    <label for="new-task-notes">Notes:</label>
+                    <textarea id="new-task-notes" rows="2" placeholder="Notes (optional)"></textarea>
+                    <input type="submit" value="Add Task">
+                </form>
+                <button class="add-task">+</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Section: Edit Task Form -->
+    <div class="bg-modal">
+        <div class="modal-content">
+            <div class="modal-header">Edit Task<div id="edit-close" class="close">+</div></div>
+            <div class="modal-main">
+                <form class="edit-form">
+                    <input type="text" id="edit-task" placeholder="Edit Task" required>
+                    <input type="date" id="edit-date" value="2021-10-05">
+                    <fieldset id="edit-priority">
+                        <legend>Priority</legend>
+                        <input type="radio" name="priority-edit" value=0 id="pedit0">
+                        <label for="pedit0">None</label>
+                        <input type="radio" name="priority-edit" value=1 id="pedit1">
+                        <label for="pedit1">Low</label>
+                        <input type="radio" name="priority-edit" value=2 id="pedit2">
+                        <label for="pedit2">Med</label>
+                        <input type="radio" name="priority-edit" value=3 id="pedit3">
+                        <label for="pedit3">High</label>
+                    </fieldset>
+                    <label for="edit-labels">Labels: </label>
+                    <input type="text" id="edit-labels" placeholder="label-1,label-2,.... ">
+                    <label for="edit-notes">Notes: </label>
+                    <input type="textarea" id="edit-notes" placeholder="Type notes here...">
+                    <input type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

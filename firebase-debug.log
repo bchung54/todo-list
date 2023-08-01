@@ -1,0 +1,79 @@
+[debug] [2022-08-22T16:19:09.075Z] ----------------------------------------------------------------------
+[debug] [2022-08-22T16:19:09.077Z] Command:       /home/bchung/.nvm/versions/node/v16.13.0/bin/node /home/bchung/.nvm/versions/node/v16.13.0/bin/firebase serve --only hosting
+[debug] [2022-08-22T16:19:09.077Z] CLI Version:   11.7.0
+[debug] [2022-08-22T16:19:09.077Z] Platform:      linux
+[debug] [2022-08-22T16:19:09.077Z] Node Version:  v16.13.0
+[debug] [2022-08-22T16:19:09.081Z] Time:          Mon Aug 22 2022 09:19:09 GMT-0700 (Pacific Daylight Time)
+[debug] [2022-08-22T16:19:09.081Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-08-22T16:19:09.083Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-08-22T16:19:09.142Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-08-22T16:19:09.143Z] > authorizing via signed-in user (brianchung54@gmail.com)
+[debug] [2022-08-22T16:19:09.143Z] [iam] checking project todolist-8e151 for permissions ["firebase.projects.get"]
+[debug] [2022-08-22T16:19:09.144Z] > refreshing access token with scopes: []
+[debug] [2022-08-22T16:19:09.144Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-08-22T16:19:09.144Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-22T16:19:09.258Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-08-22T16:19:09.259Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-08-22T16:19:09.276Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-08-22T16:19:09.277Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-22T16:19:09.280Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions [none]
+[debug] [2022-08-22T16:19:09.280Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions x-goog-quota-user=projects/todolist-8e151
+[debug] [2022-08-22T16:19:09.280Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-08-22T16:19:09.380Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions 200
+[debug] [2022-08-22T16:19:09.380Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-08-22T16:19:09.381Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151 [none]
+[debug] [2022-08-22T16:19:09.762Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151 200
+[debug] [2022-08-22T16:19:09.762Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151 {"projectId":"todolist-8e151","projectNumber":"998005222567","displayName":"TodoList","name":"projects/todolist-8e151","resources":{"hostingSite":"todolist-8e151","storageBucket":"todolist-8e151.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_b25a2c03-1a7c-451b-b833-3ed00bc15110"}
+[debug] [2022-08-22T16:19:09.763Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/todolist-8e151/sites 
+[debug] [2022-08-22T16:19:10.359Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/todolist-8e151/sites 200
+[debug] [2022-08-22T16:19:10.359Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/todolist-8e151/sites {"sites":[{"name":"projects/todolist-8e151/sites/todolist-8e151","defaultUrl":"https://todolist-8e151.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-08-22T16:19:10.359Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151/webApps/-/config [none]
+[debug] [2022-08-22T16:19:10.745Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151/webApps/-/config 200
+[debug] [2022-08-22T16:19:10.745Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151/webApps/-/config {"projectId":"todolist-8e151","appId":"1:998005222567:web:0bb6f86f962b682771ff82","storageBucket":"todolist-8e151.appspot.com","locationId":"us-central","apiKey":"AIzaSyA7W9Dq6eUvUNxZpFMVjRhxH0IyaCOXEho","authDomain":"todolist-8e151.firebaseapp.com","messagingSenderId":"998005222567"}
+[info] i  hosting: Serving hosting files from: docs {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdocs\u001b[22m"}}
+[info] ✔  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[info] i  hosting: 127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] "GET /main.js HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] \"GET /main.js HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] "GET /src/images/pngkeycom-totodile-png-484224.png HTTP/1.1" 304 - "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] \"GET /src/images/pngkeycom-totodile-png-484224.png HTTP/1.1\" 304 - \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] "GET /favicon.ico HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [22/Aug/2022:16:19:17 +0000] \"GET /favicon.ico HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [22/Aug/2022:16:23:14 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [22/Aug/2022:16:23:14 +0000] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [22/Aug/2022:16:40:59 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [22/Aug/2022:16:40:59 +0000] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[debug] [2022-08-23T18:04:56.170Z] ----------------------------------------------------------------------
+[debug] [2022-08-23T18:04:56.171Z] Command:       /home/bchung/.nvm/versions/node/v16.13.0/bin/node /home/bchung/.nvm/versions/node/v16.13.0/bin/firebase serve --only hosting
+[debug] [2022-08-23T18:04:56.172Z] CLI Version:   11.7.0
+[debug] [2022-08-23T18:04:56.172Z] Platform:      linux
+[debug] [2022-08-23T18:04:56.172Z] Node Version:  v16.13.0
+[debug] [2022-08-23T18:04:56.175Z] Time:          Tue Aug 23 2022 11:04:56 GMT-0700 (Pacific Daylight Time)
+[debug] [2022-08-23T18:04:56.176Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-08-23T18:04:56.178Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-08-23T18:04:56.238Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-08-23T18:04:56.238Z] > authorizing via signed-in user (brianchung54@gmail.com)
+[debug] [2022-08-23T18:04:56.238Z] [iam] checking project todolist-8e151 for permissions ["firebase.projects.get"]
+[debug] [2022-08-23T18:04:56.239Z] > refreshing access token with scopes: []
+[debug] [2022-08-23T18:04:56.239Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-08-23T18:04:56.240Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-23T18:04:56.362Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-08-23T18:04:56.362Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-23T18:04:56.366Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions [none]
+[debug] [2022-08-23T18:04:56.366Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions x-goog-quota-user=projects/todolist-8e151
+[debug] [2022-08-23T18:04:56.366Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-08-23T18:04:56.390Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-08-23T18:04:56.391Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-08-23T18:04:56.495Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions 200
+[debug] [2022-08-23T18:04:56.495Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/todolist-8e151:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-08-23T18:04:56.496Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151 [none]
+[debug] [2022-08-23T18:04:56.716Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151 200
+[debug] [2022-08-23T18:04:56.716Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151 {"projectId":"todolist-8e151","projectNumber":"998005222567","displayName":"TodoList","name":"projects/todolist-8e151","resources":{"hostingSite":"todolist-8e151","storageBucket":"todolist-8e151.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_5da69cd2-0762-482e-920b-258536d2c1d8"}
+[debug] [2022-08-23T18:04:56.717Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/todolist-8e151/sites 
+[debug] [2022-08-23T18:04:57.263Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/todolist-8e151/sites 200
+[debug] [2022-08-23T18:04:57.263Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/todolist-8e151/sites {"sites":[{"name":"projects/todolist-8e151/sites/todolist-8e151","defaultUrl":"https://todolist-8e151.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-08-23T18:04:57.263Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151/webApps/-/config [none]
+[debug] [2022-08-23T18:04:57.855Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151/webApps/-/config 200
+[debug] [2022-08-23T18:04:57.855Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/todolist-8e151/webApps/-/config {"projectId":"todolist-8e151","appId":"1:998005222567:web:0bb6f86f962b682771ff82","storageBucket":"todolist-8e151.appspot.com","locationId":"us-central","apiKey":"AIzaSyA7W9Dq6eUvUNxZpFMVjRhxH0IyaCOXEho","authDomain":"todolist-8e151.firebaseapp.com","messagingSenderId":"998005222567"}
+[info] i  hosting: Serving hosting files from: docs {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdocs\u001b[22m"}}
+[info] ✔  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[info] i  hosting: 127.0.0.1 - - [23/Aug/2022:18:05:02 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [23/Aug/2022:18:05:02 +0000] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [23/Aug/2022:18:05:02 +0000] "GET /src/images/pngkeycom-totodile-png-484224.png HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [23/Aug/2022:18:05:02 +0000] \"GET /src/images/pngkeycom-totodile-png-484224.png HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [23/Aug/2022:18:05:02 +0000] "GET /favicon.ico HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [23/Aug/2022:18:05:02 +0000] \"GET /favicon.ico HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\""}}

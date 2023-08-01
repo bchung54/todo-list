@@ -4,6 +4,109 @@ import domManager from './domManager.js';
 import Project from './project.js';
 import { taskFromJson } from './task.js';
 import './style.css';
+import { initializeApp } from 'firebase/app';
+import {
+	getAuth,
+	onAuthStateChanged,
+	GoogleAuthProvider,
+	signInWithPopup,
+	signOut
+} from 'firebase/auth';
+import {
+	getFirestore,
+	collection,
+    getDocs,
+	addDoc,
+	query,
+	orderBy,
+	limit,
+	onSnapshot,
+	setDoc,
+	updateDoc,
+	doc,
+	serverTimestamp
+} from 'firebase/firestore';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyA7W9Dq6eUvUNxZpFMVjRhxH0IyaCOXEho",
+  authDomain: "todolist-8e151.firebaseapp.com",
+  projectId: "todolist-8e151",
+  storageBucket: "todolist-8e151.appspot.com",
+  messagingSenderId: "998005222567",
+  appId: "1:998005222567:web:0bb6f86f962b682771ff82"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Signs-in
+async function signIn() {
+	// Sign in Firebase using popup auth and Google as the identity provider.
+	var provider = new GoogleAuthProvider();
+	await signInWithPopup(getAuth(), provider);
+}
+
+// Signs-out
+function signOutUser() {
+	// Sign out of Firebase.
+	signOut(getAuth());
+}
+
+// Initiate firebase auth
+function initFirebaseAuth() {
+	// Listen to auth state changes.
+	onAuthStateChanged(getAuth(), authStateObserver);
+}
+
+// Returns the signed-in user's profile Pic URL.
+function getProfilePicUrl() {
+  return getAuth().currentUser.photoURL || '/images/pngkey.com-totodile-png-484224.png';
+}
+
+// Returns the signed-in user's display name.
+function getUserName() {
+  return getAuth().currentUser.displayName;
+}
+
+// Returns true if a user is signed-in.
+function isUserSignedIn() {
+  return !!getAuth().currentUser;
+}
+
+/* signInButtonElement.addEventListener('click', signIn); */
+
+// Init Services
+const db = getFirestore();
+
+// Collection Ref
+const colRef = collection(db, 'tasks');
+
+// Real Time Collection Data
+onSnapshot(colRef, (snapshot) => {
+    let tasks = [];
+    snapshot.docs.forEach((doc) => {
+        tasks.push({ ...doc.data(), id: doc.id })
+    });
+    console.log(tasks);
+});
+
+// Adding task
+const newTaskForm = document.querySelector('#task-form');
+newTaskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    addDoc(colRef, {
+        title: newTaskForm.task.value,
+        project: Project.getProject(domManager.onDisplayIndex).title,
+        dueDate: newTaskForm.dueDate.value,
+        priority: newTaskForm.priority.value,
+        labels: newTaskForm.labels.value,
+        notes: newTaskForm.notes.value
+    })
+});
 
 if (storageAvailable('localStorage')) {
     // Yippee! We can use localStorage awesomeness
@@ -14,6 +117,7 @@ if (storageAvailable('localStorage')) {
         } else if (e.target.classList.contains('task-form')) {
             let projectIndex = domManager.onDisplayIndex;
             localStorage.setItem(`tasks-${projectIndex}`, JSON.stringify(Project.getProject(projectIndex).toJson()));
+            console.log(JSON.stringify(Project.getProject(projectIndex).toJson()));
         }
     });
 
@@ -26,7 +130,6 @@ if (storageAvailable('localStorage')) {
             let tasks = localStorage.getItem(`tasks-${i}`);
             let project = Project.getProject(i);
             JSON.parse(tasks).forEach((e) => {
-                console.log(taskFromJson(e));
                 project.addTask(taskFromJson(e));
             });
         }
@@ -37,40 +140,3 @@ else {
 }
 
 domManager.initDisplay();
-
-/* DUMMY DATA
-Project.addProject(Project.createProject("Web Programming"));
-Project.addProject("Play Basketball");
-
-const todo = createTask("Create webpage", '2022-06-07', 3, ['school', 'work', 'play'], "All my life");
-const todo2 = createTask("Download more RAM", '2021-08-10', 1, ['play'], "whats good");
-const todo3 = createTask("Play Solitaire",'2022-06-12');
-const todo4 = createTask("Play Spades");
-const todo5 = createTask("Play Hearts");
-const todo6 = createTask("Play Pinball");
-const todo7 = createTask("Play More Solitaire", '2022-06-15');
-const todo8 = createTask("Complete TOP");
-const todo9 = createTask("Profit");
-const todo10 = createTask("Profit1", '2022-06-13');
-const todo11 = createTask("Profit2", '2022-06-15');
-const todo12 = createTask("Profit3", '2022-06-17');
-const todo13 = createTask("Profit4", '2022-06-19');
-const todo14 = createTask("Profit5", '2022-06-19');
-
-const wp = Project.getProject(0);
-wp.addTask(todo);
-wp.addTask(todo2);
-wp.addTask(todo3);
-wp.addTask(todo4);
-wp.addTask(todo5);
-wp.addTask(todo6);
-wp.addTask(todo7);
-wp.addTask(todo8);
-wp.addTask(todo9);
-
-const pb = Project.getProject(1);
-pb.addTask(todo10);
-pb.addTask(todo11);
-pb.addTask(todo12);
-pb.addTask(todo13);
-pb.addTask(todo14); */

@@ -9,9 +9,9 @@ const domManager = (function() {
     const newProjectInput = document.querySelector('.new-project');
     const projectForm = document.querySelector('.project-form');
 
-    const addTask = document.querySelector('.add-task');
-    const taskForm = document.querySelector('.task-form');
-    const newTaskInput = document.getElementById('new-task');
+    const addTask = document.querySelector('#add-task');
+    const taskForm = document.querySelector('#task-form');
+    const newTaskInput = taskForm.task;
     const mainDisplay = document.querySelector('.display');
 
     const editForm = document.querySelector('.edit-form');
@@ -70,7 +70,7 @@ const domManager = (function() {
         })
 
         // Submit new task information
-        taskForm.addEventListener('submit', function(e) {
+/*         taskForm.addEventListener('submit', function(e) {
             const title = document.getElementById('new-task').value;
             const dueDate = document.getElementById('new-task-dueDate').value;
             const priority = document.querySelector('input[name="priority-new"]:checked').value;
@@ -79,7 +79,7 @@ const domManager = (function() {
             const currProject = Project.getProject(onDisplayIndex);
             
             // Add information to new project
-            currProject.addTask(createTask(title, dueDate, priority, labels, notes));
+            currProject.addTask(createTask(taskForm.task, taskForm.dueDate, taskForm.priority, labels, notes));
             
             // Close form and reset display
             this.style.display = 'none';
@@ -87,7 +87,7 @@ const domManager = (function() {
             resetDisplay();
             
             e.preventDefault();
-        });
+        }); */
 
         // Submit updated task information
         editForm.addEventListener('submit', function(e) {

@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tododile</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="./main.js" defer></script>
+    <script src="main.js" defer></script>
 </head>
+
 <body>
     <div id="content">
         <header>
             <div class="logo">
-                <img src="../src/images/pngkey.com-totodile-png-484224.png" alt="icon" class="icon">
+                <img src="../src/images/pngkeycom-totodile-png-484224.png" alt="icon" class="icon">
                 <h1>ToDodile</h1>
             </div>
             <span class="subtitle">For all your project crunching needs!</span>
+            <button id="sign-in">Sign In</button> 
         </header>
         <main>
             <div class="sidebar">
@@ -33,30 +36,30 @@
                 </div>
             </div>
             <div class="display">
-                <form class="task-form">
-                    <div class="taskform-line1">
-                        <input type="text" id="new-task" placeholder="New Task" required>
-                        <input type="date" id="new-task-dueDate">
+                <form id="task-form">
+                    <div id ="taskform-line1">
+                        <input type="text" name="task" placeholder="New Task" required>
+                        <input type="date" name="dueDate">
                         <div id="add-close" class="close">+</div>
                     </div>
                     <div id="new-priority">
                         <span>Priority: </span>
-                        <input type="radio" name="priority-new" value=0 id="pselect0" checked="checked">
+                        <input type="radio" name="priority" value=0 id="pselect0" checked="checked">
                         <label for="pselect0">None</label>
-                        <input type="radio" name="priority-new" value=1 id="pselect1">
+                        <input type="radio" name="priority" value=1 id="pselect1">
                         <label for="pselect1">Low</label>
-                        <input type="radio" name="priority-new" value=2 id="pselect2">
+                        <input type="radio" name="priority" value=2 id="pselect2">
                         <label for="pselect2">Med</label>
-                        <input type="radio" name="priority-new" value=3 id="pselect3">
+                        <input type="radio" name="priority" value=3 id="pselect3">
                         <label for="pselect3">High</label>
                     </div>
-                    <label for="new-task-labels">Labels:</label>
-                    <input type="text" id="new-task-labels" placeholder="Labels (optional)">
-                    <label for="new-task-notes">Notes:</label>
-                    <textarea id="new-task-notes" rows="2" placeholder="Notes (optional)"></textarea>
+                    <label for="labels">Labels:</label>
+                    <input type="text" name="labels" placeholder="Labels (optional)">
+                    <label for="notes">Notes:</label>
+                    <textarea name="notes" rows="2" placeholder="Notes (optional)"></textarea>
                     <input type="submit" value="Add Task">
                 </form>
-                <button class="add-task">+</button>
+                <button id="add-task">+</button>
             </div>
         </main>
     </div>
@@ -64,7 +67,8 @@
     <!-- Modal Section: Edit Task Form -->
     <div class="bg-modal">
         <div class="modal-content">
-            <div class="modal-header">Edit Task<div id="edit-close" class="close">+</div></div>
+            <div class="modal-header">Edit Task<div id="edit-close" class="close">+</div>
+            </div>
             <div class="modal-main">
                 <form class="edit-form">
                     <input type="text" id="edit-task" placeholder="Edit Task" required>
@@ -90,4 +94,5 @@
         </div>
     </div>
 </body>
+
 </html>

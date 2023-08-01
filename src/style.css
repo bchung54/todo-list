@@ -87,6 +87,22 @@ h1, h2 {
     -webkit-text-stroke: 0.15rem var(--logo-blue);
 }
 
+#sign-in {
+    position: absolute;
+    top: 19%;
+    right: 16%;
+    height: 36px;
+    border: none;
+    padding: 0;
+    background-color: red;
+    color: var(--logo-yellow);
+    font-family: PokemonSolid, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2rem;
+    outline: inherit;
+    -webkit-text-stroke: 0.1rem var(--logo-blue);
+    cursor: pointer;
+}
+
 /* Main: Sidebar and Project Display */
 
 main {
@@ -306,7 +322,7 @@ input[type='checkbox']:checked ~ *:not(.task-action) {
 
 /* Forms */
 
-.task-form {
+#task-form {
     display: none;
     position: relative;
     flex-direction: column;
@@ -316,12 +332,12 @@ input[type='checkbox']:checked ~ *:not(.task-action) {
     border-radius: 0.75rem;
 }
 
-.task-form *:not(.add-close, .taskform-line1) {
+#task-form *:not(.add-close, #taskform-line1) {
     font-family: PokemonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0.5rem;
 }
 
-#new-task {
+input[name='task'] {
     width: 50%;
 }
 
@@ -329,14 +345,15 @@ input[type='checkbox']:checked ~ *:not(.task-action) {
     padding-left: 0;
 }
 
-#new-task-labels, #new-task-notes {
+input[name='labels'], input[name='notes'] {
     width: 80%;
 }
 
-label[for=new-task-notes] {
+label[for=notes] {
     vertical-align: top;
 }
-.add-task {
+
+#add-task {
     display: none;
     flex-direction: column;
     justify-content: center;
